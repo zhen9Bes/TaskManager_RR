@@ -1,0 +1,13 @@
+#ifndef CPU_H
+#define CPU_H
+
+#include "process.h"
+
+class CPU
+{
+public:
+    CPU();
+    void execute(Process& process, int duration);
+};
+
+#endif // CPU_H
