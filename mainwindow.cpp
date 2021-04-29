@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
     _ui->setupUi(this);
 
     _scheduler = new Scheduler();
+    _tasks = _scheduler->getProcessQueue();
     _timer = new QTimer;
     _time = QTime::fromString("00:00.000", "mm:ss.zzz");
     _ui->timerLabel->setText(_time.toString());
@@ -102,16 +103,17 @@ void MainWindow::on_addTaskButton_clicked()
     try {
         std::string nameProcess = _ui->nameProcessEdit->text().toStdString();
         int duration = _ui->durationTimeEdit->text().toInt();
-        Process proc(nameProcess, duration, "");
-        _scheduler->addProcess(&proc);
+//        Process proc(nameProcess, duration, "");
+//        _scheduler->addProcess(&proc);
+        _scheduler->addProcess(nameProcess, duration, "");
 
-        Job job;
-        job.process = &proc;
-        job.id = QString::number(proc.getId());
-        job.name = QString(proc.getName().c_str());
-        _jobs << job;
+//        Job job;
+//        job.process = &proc;
+//        job.id = QString::number(proc.getId());
+//        job.name = QString(proc.getName().c_str());
+//        _jobs << job;
 
-        addRow(&job);
+//        addRow(&job);
 
         _ui->allProcessListWidget->addItem(_ui->nameProcessEdit->text() + "\t" + _ui->durationTimeEdit->text());
 
@@ -201,8 +203,8 @@ void MainWindow::updateProgressView() {
         }
         if( QTableWidgetItem* item = _progressView->item( i, 3 ) ) {
             Process* proc = processForRow(i);
-            int currentProgress = proc->getProgress();
-            item->setData( Qt::DisplayRole, currentProgress );
+//            int currentProgress = proc->getProgress();
+//            item->setData( Qt::DisplayRole, currentProgress );
         }
     }
 }

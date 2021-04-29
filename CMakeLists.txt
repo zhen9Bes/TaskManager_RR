@@ -34,6 +34,8 @@ set(PROJECT_SOURCES
     mainwindow.ui
     process.cpp
     process.h
+    task.cpp
+    task.h
     job.cpp
     job.h
     scheduler.cpp

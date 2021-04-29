@@ -16,9 +16,6 @@ Process::Process(std::string name, int duration, std::string program)
     }
     _id = ++Process::_counterId;
     _state = BLOCKED;       //Сделаем по умолчанию BLOCKED, но можно сделать и READY
-    _isComplete = false;
-    _progress = 0;
-    _stepProgress = 100.0 / (_duration / 20.0);
 }
 
 Process::~Process()
@@ -30,37 +27,21 @@ Process::~Process()
 
 void Process::execute(int timeExecute)
 {
-    this->_state = State::RUNNING;
-    if(_duration <= timeExecute){
-        _duration = 0;
-        _progress = 100;
-        _isComplete = true;
-        // код выполнения
-        Sleep(timeExecute);
-    }else{
-        _duration -= timeExecute;
-        _progress += _stepProgress;
-        if(_progress >= 100){
-            _progress = 95;
-        }
-        // код выполнения
-        Sleep(timeExecute);
-    }
-}
-
-int Process::getProgress()
-{
-    return _progress;
-}
-
-bool Process::isComplete()
-{
-    return _isComplete;
-}
-
-void Process::setComplete()
-{
-    _isComplete = true;
+//    this->_state = State::RUNNING;
+//    if(_duration <= timeExecute){
+//        _duration = 0;
+//        _progress = 100;
+//        // код выполнения
+//        Sleep(timeExecute);
+//    }else{
+//        _duration -= timeExecute;
+//        _progress += _stepProgress;
+//        if(_progress >= 100){
+//            _progress = 95;
+//        }
+//        // код выполнения
+//        Sleep(timeExecute);
+//    }
 }
 
 int Process::getDuration()
@@ -68,9 +49,9 @@ int Process::getDuration()
     return _duration;
 }
 
-void Process::setDuration(int duration)
+void Process::addDuration(int duration)
 {
-    _duration = duration;
+    _duration += duration;
 }
 
 void Process::setState(State state)
@@ -93,6 +74,8 @@ std::string Process::getStateStr()
     case ENDED:
         return "Ended";
         break;
+    default:
+        return "Error";
     }
 }
 

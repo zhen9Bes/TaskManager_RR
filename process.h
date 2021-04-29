@@ -43,11 +43,8 @@ public:
     std::string getName();
     void setName(std::string name);
 
-    void setComplete();
-    bool isComplete();
-
     int getDuration();
-    void setDuration(int duration);
+    void addDuration(int duration);
 
     void setState(State state);
     std::string getStateStr();
@@ -57,13 +54,9 @@ private:
     static int _counterId;
     int _id;
     std::string _name;
-    int _arrivalTime;
     int _duration;
-    int _progress;
-    double _stepProgress;
     std::string _program;
     State _state;
-    bool _isComplete;
 };
 
 #endif // PROCESS_H

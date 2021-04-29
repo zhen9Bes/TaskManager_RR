@@ -41,6 +41,8 @@ private:
     };
     QList<Job> _jobs;
 
+    const std::deque<Task>* _tasks;
+
     void addRow(Job* job);
     void updateProgressView();
     Process* processForRow(int row);
