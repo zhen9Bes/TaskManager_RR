@@ -122,9 +122,6 @@ void MainWindow::on_addTaskButton_clicked()
         _ui->processIdEdit->setText(QString::number(_ui->processIdEdit->text().toInt() + 1));
         _ui->nameProcessEdit->setText(QString::number(_ui->processIdEdit->text().toInt()));
 
-//        if(_ui->autoExecCheckButton->isChecked() && !_timer->isActive()){
-//            _timer->start(_programTick);
-//        }
     }  catch (const std::exception& ex) {
         createMessage(ex.what(), QMessageBox::Icon::Critical);
     }  catch (const char* ex){
@@ -137,7 +134,7 @@ void MainWindow::timer_tick()
     //Обновляем значение времени на форме
     _time = _time.addMSecs(_programTick);
     _ui->timerLabel->setText(_time.toString());
-
+    updateProgressView();
     if(!_scheduler->isComplete() && _ui->executeButton->isChecked()){
         _scheduler->schedule();
 
@@ -195,6 +192,9 @@ void MainWindow::addRow(Job* job) {
 }
 
 void MainWindow::updateProgressView() {
+    if(_tasks->size()>0)
+        processForRow(0);
+
     for(int i = 0; i < _progressView->rowCount(); ++i){
         if( QTableWidgetItem* item = _progressView->item( i, 2 ) ) {
             Process* proc = processForRow(i);
@@ -211,7 +211,10 @@ void MainWindow::updateProgressView() {
 
 Process* MainWindow::processForRow(int row)
 {
-    return _jobs.at(row).process;
+    Task task = _tasks->at(row);
+    return task.getProcess();
+
+//    return _jobs.at(row).process;
 }
 
 void MainWindow::createMessage(const char* message, QMessageBox::Icon icon)

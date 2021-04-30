@@ -24,7 +24,7 @@ public:
     void addProcess(Process* process);
     void addProcess(std::string name, int duration, std::string program);
     int getProgressProcess(Process* process);
-    
+
     const std::deque<Task>* getProcessQueue();
     const std::vector<Task>* getEndedProcess();
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(TaskMng_Emulator LANGUAGES CXX)
+project(TaskManager_RR LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -45,19 +45,19 @@ set(PROJECT_SOURCES
     )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(TaskMng_Emulator
+    qt_add_executable(TaskManager_RR
         ${PROJECT_SOURCES}
     )
 else()
     if(ANDROID)
-        add_library(TaskMng_Emulator SHARED
+        add_library(TaskManager_RR SHARED
             ${PROJECT_SOURCES}
         )
     else()
-        add_executable(TaskMng_Emulator
+        add_executable(TaskManager_RR
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(TaskMng_Emulator PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(TaskManager_RR PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
